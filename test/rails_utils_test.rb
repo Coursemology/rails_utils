@@ -266,22 +266,20 @@ describe "RailsUtils::ActionViewExtensions" do
       end
     end
 
-    describe "sanitizer_options" do
-      it "can allow sanitizer options like tags" do
-        set_flash :alert, "<script>dangerous</script>"
-        view.flash_messages({}, { tags: ['script'] }).must_match "<script>dangerous</script>"
-      end
-    end
-
-    it "should strip <script> tags by default" do
+    it "should strip <script> tags and their content by default" do
       set_flash :alert, "<script>alert('XSS')</script>"
       view.flash_messages.wont_match "<script>alert('XSS')<script>"
-      view.flash_messages.must_match "alert('XSS')"
+      view.flash_messages.must_match ""
     end
 
-    it "should preserve anchor links by default" do
+    it "should strip anchor links by default" do
       set_flash :alert, "<a href=\"https://example.org\">example page</a>"
-      view.flash_messages.must_match "<a href=\"https://example.org\">example page</a>"
+      view.flash_messages.wont_match "<a href=\"https://example.org\">example page</a>"
+    end
+
+    it "should strip img links by default" do
+      set_flash :alert, "<img src=\"https://example.org/image.jpg\" />"
+      view.flash_messages.must_match ""
     end
 
     it "should skip flash[:timedout]" do

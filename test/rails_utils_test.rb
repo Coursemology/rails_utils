@@ -243,12 +243,12 @@ describe "RailsUtils::ActionViewExtensions" do
     describe "when bootstrap is present" do
       it "can fade in and out" do
         set_flash :alert, "not important"
-        view.flash_messages.must_match /fade in/
+        view.flash_messages.must_match(/fade in/)
       end
 
       it "can be dismissed" do
         set_flash :alert, "not important"
-        view.flash_messages.must_match /data-dismiss=.*alert/
+        view.flash_messages.must_match(/data-dismiss=.*alert/)
       end
     end
 
@@ -256,14 +256,30 @@ describe "RailsUtils::ActionViewExtensions" do
       it "can allow override of button content (default 'x')" do
         set_flash :alert, "not important"
         view.flash_messages.must_match %r{>x</button>}
-        view.flash_messages(button_html: '').must_match %r{button class="close"}
+        view.flash_messages(button_html: '').must_match %r{button type="button" class="close"}
       end
 
       it "can allow override of button css class (default 'close')" do
         set_flash :alert, "not important"
         view.flash_messages.must_match %r{>x</button>}
-        view.flash_messages(button_class: 'abc def').must_match %r{button class="abc def"}
+        view.flash_messages(button_class: 'abc def').must_match %r{button type="button" class="abc def"}
       end
+    end
+
+    it "should strip <script> tags and their content by default" do
+      set_flash :alert, "<script>alert('XSS')</script>"
+      view.flash_messages.wont_match "<script>alert('XSS')<script>"
+      view.flash_messages.must_match ""
+    end
+
+    it "should strip anchor links by default" do
+      set_flash :alert, "<a href=\"https://example.org\">example page</a>"
+      view.flash_messages.wont_match "<a href=\"https://example.org\">example page</a>"
+    end
+
+    it "should strip img links by default" do
+      set_flash :alert, "<img src=\"https://example.org/image.jpg\" />"
+      view.flash_messages.must_match ""
     end
 
     it "should skip flash[:timedout]" do
@@ -275,18 +291,6 @@ describe "RailsUtils::ActionViewExtensions" do
       set_flash :alert, "not important"
 
       view.flash_messages.html_safe?.must_equal true
-    end
-
-    it "each message of flash should call html_safe" do
-      set_flash :alert, Minitest::Mock.new
-
-      messages = view.flash.instance_variable_get(:@flashes).values.each do |message|
-        message.expect :blank?, false
-        message.expect :html_safe, "test"
-        message.expect :html_safe?, true
-      end
-
-      view.flash_messages.must_equal "<div class=\"alert alert-danger alert-error fade in \"><button class=\"close\" data-dismiss=\"alert\" type=\"button\">x</button>test</div>"
     end
   end
 end

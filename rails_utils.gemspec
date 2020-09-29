@@ -20,8 +20,7 @@ Gem::Specification.new do |s|
   # Attempted to upgrade minitest to v5.0.6 on 22 Aug. Failed because turn v0.9.6 has a mismatched adapter to minitest v5.0.6
   # https://github.com/TwP/turn/issues/122
 
-  s.add_development_dependency "minitest" , "~> 4.7.5"
-  s.add_development_dependency "turn"     , "~> 0.9.6"
+  s.add_development_dependency "minitest" , "~> 5.1"
   s.add_development_dependency "mocha"    , "~> 0.14.0"
 
   s.license = 'MIT'

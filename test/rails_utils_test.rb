@@ -1,4 +1,5 @@
 require 'test_helper'
+# require 'rspec/rails'
 
 describe "RailsUtils::ActionViewExtensions" do
   let(:controller) { ActionController::Base.new }
@@ -231,11 +232,11 @@ describe "RailsUtils::ActionViewExtensions" do
         before { set_flash key, expected_message }
 
         it "prints class '#{expected_class}'" do
-          view.flash_messages.must_match expected_class
+          _(view.flash_messages).must_match expected_class
         end
 
         it "prints message '#{expected_message}'" do
-          view.flash_messages.must_match expected_message
+          _(view.flash_messages).must_match expected_message
         end
       end
     end
@@ -243,26 +244,26 @@ describe "RailsUtils::ActionViewExtensions" do
     describe "when bootstrap is present" do
       it "can fade in and out" do
         set_flash :alert, "not important"
-        view.flash_messages.must_match /fade in/
+        _(view.flash_messages).must_match /fade in/
       end
 
       it "can be dismissed" do
         set_flash :alert, "not important"
-        view.flash_messages.must_match /data-dismiss=.*alert/
+        _(view.flash_messages).must_match /data-dismiss=.*alert/
       end
     end
 
     describe "options" do
       it "can allow override of button content (default 'x')" do
         set_flash :alert, "not important"
-        view.flash_messages.must_match %r{>x</button>}
-        view.flash_messages(button_html: '').must_match %r{button class="close"}
+        _(view.flash_messages).must_match %r{>x</button>}
+        view.flash_messages(button_html: '').must_match %r{class="close"}
       end
 
       it "can allow override of button css class (default 'close')" do
         set_flash :alert, "not important"
         view.flash_messages.must_match %r{>x</button>}
-        view.flash_messages(button_class: 'abc def').must_match %r{button class="abc def"}
+        view.flash_messages(button_class: 'abc def').must_match %r{class="abc def"}
       end
     end
 
@@ -286,7 +287,7 @@ describe "RailsUtils::ActionViewExtensions" do
         message.expect :html_safe?, true
       end
 
-      view.flash_messages.must_equal "<div class=\"alert alert-danger alert-error fade in \"><button class=\"close\" data-dismiss=\"alert\" type=\"button\">x</button>test</div>"
+      view.flash_messages.must_equal "<div class=\"alert alert-danger alert-error fade in \"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>test</div>"
     end
   end
 end

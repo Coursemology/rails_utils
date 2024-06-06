@@ -3,6 +3,20 @@
 Rails helpers based on opinionated project practices. Useful for structuring CSS and JavaScript,
 display title of the page, and flash messages with Bootstrap.
 
+## Forkception
+
+This repo is a fork of:
+
+- The [fonglh](https://github.com/fonglh/rails_utils) gem
+- which is the fork of the original gem maintained by [Winston](https://github.com/winston/rails_utils)
+
+## Requirements
+
+- Ruby >= 3.0, <= 3.2
+- Rails >= 6.0, <= 7.1
+
+The library might work for the higher version, however it's only tested for the specs mentioned above.
+
 ## Installation
 
 Add rails_utils to your application's Gemfile:
@@ -36,7 +50,7 @@ you can use `page_class` to include the controller name and action name as CSS c
 becomes
 
 ```html
-<body class='animes show'>
+<body class="animes show">
   ...
 </body>
 ```
@@ -79,9 +93,7 @@ When controller and action is `animes#show` you can easily use `page_title` like
 becomes
 
 ```html
-<div class="page-title">
-  Animes Show
-</div>
+<div class="page-title">Animes Show</div>
 ```
 
 Besides, it supports I18n and interpolation:
@@ -104,9 +116,7 @@ Pass in `anime_name`:
 becomes
 
 ```html
-<div class="page-title">
-  Showing anime of: Frozen
-</div>
+<div class="page-title">Showing anime of: Frozen</div>
 ```
 
 ### #`javascript_initialization`
@@ -130,13 +140,17 @@ compiles to:
 
 ```html
 <script type="text/javascript">
-//<![CDATA[
-        MyApp.init();
-        if(MyApp.animes) {
-          if(MyApp.animes.init) { MyApp.animes.init(); }
-          if(MyApp.animes.show && MyApp.animes.show.init) { MyApp.animes.show.init(); }
-        }
-//]]>
+  //<![CDATA[
+  MyApp.init();
+  if (MyApp.animes) {
+    if (MyApp.animes.init) {
+      MyApp.animes.init();
+    }
+    if (MyApp.animes.show && MyApp.animes.show.init) {
+      MyApp.animes.show.init();
+    }
+  }
+  //]]>
 </script>
 ```
 
@@ -196,7 +210,7 @@ Minitest-ed. To run all tests, just run `rake` or `rake test`.
 
 ## Author
 
-Rails Utils is maintained by [Winston Teo](mailto:winstonyw+rails_utils@gmail.com).
+Rails Utils is originally maintained by [Winston Teo](mailto:winstonyw+rails_utils@gmail.com).
 
 [You should follow Winston on Twitter](https://www.twitter.com/winstonyw), or find out more on [WinstonYW](http://www.winstonyw.com) and [LinkedIn](http://sg.linkedin.com/in/winstonyw).
 
@@ -204,8 +218,5 @@ Rails Utils is maintained by [Winston Teo](mailto:winstonyw+rails_utils@gmail.co
 
 Copyright © 2013-2016 Winston Teo Yong Wei. Free software, released under the MIT license.
 
-
 [version-badge]: https://badge.fury.io/rb/rails_utils.svg
 [rubygems]: https://rubygems.org/gems/rails_utils
-[travis-badge]: https://travis-ci.org/winston/rails_utils.svg
-[travis]: https://travis-ci.org/winston/rails_utils

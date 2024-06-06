@@ -3,7 +3,13 @@ require 'test_helper'
 describe "RailsUtils::ActionViewExtensions" do
   let(:controller) { ActionController::Base.new }
   let(:request)    { ActionDispatch::Request.new(flash: {}) }
-  let(:view)       { ActionView::Base.new({}, {}, "") }
+  let(:view) do
+    if Rails::VERSION::MAJOR == 6 && Rails::VERSION::MINOR == 0
+      ActionView::Base.new
+    else
+      ActionView::Base.new({}, {}, "")
+    end
+  end
 
   before do
     controller.request = request

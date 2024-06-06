@@ -27,12 +27,12 @@ module RailsUtils
       @page_title ||= begin
         default_page_title = "#{page_controller_class.capitalize} #{page_action_class.capitalize}"
         i18n_options = { default: default_page_title }.merge!(options)
-        I18n.t("#{page_controller_class}.#{page_action_class}.title", i18n_options)
+        I18n.t("#{page_controller_class}.#{page_action_class}.title", **i18n_options)
       end
     end
 
     def javascript_initialization(options = {})
-      application_name  = Rails.application.class.parent_name
+      application_name  = Rails.application.class.module_parent_name
       js_namespace_name = page_controller_class_underscored
       js_function_name  = page_action_class
 

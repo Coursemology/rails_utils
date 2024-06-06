@@ -2,6 +2,19 @@
 
 ### Unreleased
 
+### Version 6.0.0
+
+- Furthermore support Rails 7.0
+- Removing the dependencies for sprocket-rails as a consequences of that gem no longer needed in Rails 7
+
+### Version 5.0.0
+
+- Add dependencies to support Rails 6.1
+- parent_name is deprecated in rails 6 and gone in 6.1
+- Update I18n translation function
+- Change assertion function in spec
+- Bump ruby version to be at least 3.0
+
 ### Version 4.0.0
 
 - [Pull Request 28](https://github.com/winston/rails_utils/pull/28) - [Development] remove `.ruby-version` file - by @JuanitoFatas

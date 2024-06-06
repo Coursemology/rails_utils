@@ -7,17 +7,20 @@ require "rails_utils/version"
 Gem::Specification.new do |s|
   s.name        = "rails_utils"
   s.version     = RailsUtils::VERSION
-  s.authors     = ["Winston Teo"]
-  s.email       = ["winston.yongwei+rails_utils@gmail.com"]
-  s.homepage    = "https://github.com/winston/rails_utils"
+  s.authors     = ["Bivan Alzacky Harmanto"]
+  s.email       = ["bivan.alzacky@gmail.com"]
+  s.homepage    = "https://github.com/Coursemology/rails_utils"
   s.summary     = "Rails helpers based on opinionated project practices."
   s.description = "Rails helpers based on opinionated project practices. Currently useful for structuring CSS and JS."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", ">=3.2"
+  s.required_ruby_version = ">= 3.0"
+
+  s.add_dependency "rails", "~> 6"
 
   s.add_development_dependency "minitest" , ">= 4.7.5"
+  s.add_development_dependency "sprockets", '~>3.0'
   s.add_development_dependency "mocha"
 
   s.license = 'MIT'

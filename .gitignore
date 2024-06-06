@@ -8,3 +8,4 @@ test/dummy/.sass-cache
 vendor/bundle
 Gemfile.lock
 .ruby-version
+gemfiles/*.gemfile.lock

@@ -17,10 +17,11 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 3.0"
 
-  s.add_dependency "rails", "~> 6"
+  s.add_dependency "rails", ">= 6"
 
   s.add_development_dependency "minitest" , ">= 4.7.5"
   s.add_development_dependency "sprockets", '~>3.0'
+  s.add_development_dependency "appraisal", "~> 2.1"
   s.add_development_dependency "mocha"
 
   s.license = 'MIT'
